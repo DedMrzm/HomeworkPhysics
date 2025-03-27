@@ -5,44 +5,53 @@ using UnityEngine;
 public class Timer : MonoBehaviour
 {
     [SerializeField] private float _startTimer;
-    private float _mainTimer;
+    [SerializeField] private float _mainTimer;
     private float _stepBetweenOutput = 1f;
     private float _currentTime = 0f;
 
     private float _loseTime;
+    private bool _isPlaying;
 
     public float MainTimer => _mainTimer;
-    public bool IsPlaying;
+    
 
     private void Awake()
     {
+        _isPlaying = true;
         _mainTimer = _startTimer;
     }
 
-    void Update()
+    private void Update()
     {
-        if (IsPlaying)
+        if (_isPlaying)
             StartCounting();
     }
 
     public void StartCounting()
     {
         _currentTime += Time.deltaTime;
-        if (_currentTime > _stepBetweenOutput)
+        if (_currentTime >= _stepBetweenOutput)
         {
             _currentTime = 0f;
             _mainTimer -= _stepBetweenOutput;
-            Debug.Log(_mainTimer);
+            Debug.Log($"Timer: {_mainTimer}");
         }
         if(_mainTimer <= 0f)
         {
-            IsPlaying = false;
+            _isPlaying = false;
             _mainTimer = 0f;
         }
     }
 
     public void StopCounting()
     {
-        IsPlaying = false;
+        _isPlaying = false;
+    }
+
+    public void Restart()
+    {
+        _currentTime = 0;
+        _isPlaying = true;
+        _mainTimer = _startTimer;
     }
 }

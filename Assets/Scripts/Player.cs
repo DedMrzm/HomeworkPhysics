@@ -9,6 +9,8 @@ public class Player : MonoBehaviour
 
     private KeyCode JumpCode = KeyCode.Space;
 
+    private Vector3 _startPosition;
+
     private Rigidbody _rigidbody;
 
     [SerializeField] private float _speed;
@@ -21,23 +23,29 @@ public class Player : MonoBehaviour
 
     private float _deadZone = 0.05f;
 
+    private bool _isPlaying;
+
     public int CoinsInWallet => _coinsInWallet;
 
     // Start is called before the first frame update
     private void Awake()
     {
+        _startPosition = transform.position;
+        _isPlaying = true;
         _rigidbody = GetComponent<Rigidbody>();
     }
 
     // Update is called once per frame
     private void Update()
     {
-        InputHandler();
+        if (_isPlaying)
+            InputHandler();
     }
 
     private void FixedUpdate()
     {
-        MoveHandler();
+        if (_isPlaying)
+            MoveHandler();
     }
 
     private void Jump()
@@ -65,5 +73,20 @@ public class Player : MonoBehaviour
     public void TakeCoin(Coin coin)
     {
         _coinsInWallet += coin.CurrentValue;
+        Debug.Log($"Coins in wallet: {_coinsInWallet}");
     }
+
+    public void Stop()
+    {
+        _isPlaying = false;
+        _rigidbody.velocity = Vector3.zero;
+    }
+
+    public void Restart()
+    {
+        _isPlaying = true;
+        transform.position = _startPosition;
+        _coinsInWallet = 0;
+    }
+        
 }
