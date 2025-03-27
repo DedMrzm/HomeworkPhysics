@@ -14,6 +14,8 @@ public class Player : MonoBehaviour
     [SerializeField] private float _speed;
     [SerializeField] private float _jumpForce;
 
+    private int _wallet;
+
     private float _xInput;
     private float _zInput;
 
@@ -56,5 +58,10 @@ public class Player : MonoBehaviour
 
         if(Input.GetKeyDown(JumpCode))
             Jump();
+    }
+
+    public void TakeCoin()
+    {
+
     }
 }

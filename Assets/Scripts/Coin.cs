@@ -18,4 +18,14 @@ public class Coin : MonoBehaviour
     {
         return Random.Range(_minValue, _maxValue);
     }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        Coin coin = other.GetComponent<Coin>();
+
+        if (coin != null)
+        {
+
+        }
+    }
 }
