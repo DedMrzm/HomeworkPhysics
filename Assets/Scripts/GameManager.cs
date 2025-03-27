@@ -50,7 +50,6 @@ public class GameManager : MonoBehaviour
     {
         _timer.Restart();
         _player.Restart();
-
         Debug.Log($"RESTART:\nTimer: {_timer.MainTimer}\nCoins in Wallet: {_player.CoinsInWallet}");
 
         foreach (Coin coin in _coins)
