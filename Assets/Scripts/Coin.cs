@@ -21,11 +21,12 @@ public class Coin : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        Coin coin = other.GetComponent<Coin>();
+        Player player = GetComponent<Player>();
 
-        if (coin != null)
+        if (player != null)
         {
-
+            player.TakeCoin(this);
+            gameObject.SetActive(false);
         }
     }
 }

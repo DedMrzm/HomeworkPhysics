@@ -14,12 +14,14 @@ public class Player : MonoBehaviour
     [SerializeField] private float _speed;
     [SerializeField] private float _jumpForce;
 
-    private int _wallet;
+    private int _coinsInWallet;
 
     private float _xInput;
     private float _zInput;
 
     private float _deadZone = 0.05f;
+
+    public int CoinsInWallet => _coinsInWallet;
 
     // Start is called before the first frame update
     private void Awake()
@@ -60,8 +62,8 @@ public class Player : MonoBehaviour
             Jump();
     }
 
-    public void TakeCoin()
+    public void TakeCoin(Coin coin)
     {
-
+        _coinsInWallet += coin.CurrentValue;
     }
 }
